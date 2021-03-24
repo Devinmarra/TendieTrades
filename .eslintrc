@@ -1,0 +1,32 @@
+{
+  "root": true,
+  "extends": [
+    "@react-native-community",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "react/jsx-no-bind": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "react-redux",
+            "importNames": ["useSelector", "useStore"],
+            "message": "Please use connect() to access Redux"
+          }
+        ]
+      }
+    ],
+    "quotes": [2, "double"]
+  }
+}
