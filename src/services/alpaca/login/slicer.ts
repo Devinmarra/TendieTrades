@@ -26,8 +26,20 @@ export const { actions, reducer, name } = createSlice({
     initialState,
     name: "login",
     reducers: {
-        configureApi(state, action: PayloadAction<ApiConfig>) {
-            state.apiConfig = action.payload;
+        keyUpdated(state, action: PayloadAction<string>) {
+            state.apiConfig.appApiKey = action.payload;
+        },
+        secretUpdated(state, action: PayloadAction<string>) {
+            state.apiConfig.appApiSecret = action.payload;
+        },
+        paperHandsUpdated(state, action: PayloadAction<boolean>) {
+            state.apiConfig.paperTrading = action.payload;
+        },
+        polygonUpdated(state, action: PayloadAction<boolean>) {
+            state.apiConfig.usePolygon = action.payload;
+        },
+        loginSubmitted(state) {
+            state;
         },
         loginCompleted: {
             reducer: (state, action) => {

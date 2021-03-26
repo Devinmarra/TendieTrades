@@ -13,7 +13,7 @@ import { createOrder, getOrders, cancelOrder } from "./orders/sagas";
 import { configureApi } from "./login/sagas";
 
 export const sagas = () => [
-    takeLatest(loginActions.configureApi, configureApi),
+    takeLatest(loginActions.loginSubmitted, configureApi),
     takeLatest(accountActions.getAccountInfo, getAccount),
     takeLatest(assetActions.getSymbol, getStonkSymbol),
     takeLatest(accountActions.getAccountConfiguration, getAccountConfiguration),

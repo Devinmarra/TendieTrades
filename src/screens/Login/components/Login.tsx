@@ -2,11 +2,9 @@ import React from "react";
 import { RootState } from "../parent";
 import { Dispatch } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
-import { actions } from "../slicer";
 import { actions as loginActions } from "src/services/alpaca/login/slicer";
 import { Text } from "src/common/components/Text";
 import { Card } from "src/common/components/Card";
-import { ApiConfig } from "src/services/alpaca/types";
 import { Wrap } from "src/common/components/Screen";
 import { Input } from "src/common/components/Input";
 import styled, { css } from "styled-components/native";
@@ -14,6 +12,7 @@ import { Checkbox } from "src/common/components/Checkbox";
 import { Dimensions, NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
 import * as z from "zod";
 import { Button } from "src/common/components/Button";
+import { getDefaultLoginState } from "../selectors";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -42,45 +41,31 @@ const Field = styled.View`
     ${(props: z.infer<z.ZodRecord>) => props.nowrap && noWrap}
 `;
 export interface LoginProps {
-    isTrue: boolean;
-    setStatus: (status: boolean) => void;
-    configureApi: (config: ApiConfig) => void;
-}
-export interface LoginState {
     appApiKey: string;
     appApiSecret: string;
     paperTrading: boolean;
     usePolygon: boolean;
+    submitLogin: () => void;
+    updatePolygon: (value: boolean) => void;
+    updatePaperTrade: (value: boolean) => void;
+    updateSecret: (value: string) => void;
+    updateKey: (value: string) => void;
 }
-export class Login extends React.PureComponent<LoginProps, LoginState> {
-    public state: LoginState = {
-        appApiKey: "",
-        appApiSecret: "",
-        paperTrading: true,
-        usePolygon: false,
-    };
-    public onPressSwitch = () => {
-        this.props.setStatus(!this.props.isTrue);
-    };
+export class Login extends React.PureComponent<LoginProps> {
     public onPressSubmit = () => {
-        this.props.configureApi({
-            appApiKey: this.state.appApiKey,
-            appApiSecret: this.state.appApiSecret,
-            paperTrading: this.state.paperTrading,
-            usePolygon: this.state.usePolygon,
-        });
+        this.props.submitLogin();
     };
     public onKeyChanged = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
-        this.setState({ appApiKey: event.nativeEvent.text });
+        this.props.updateKey(event.nativeEvent.text);
     };
     public onSecretChanged = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
-        this.setState({ appApiSecret: event.nativeEvent.text });
+        this.props.updateSecret(event.nativeEvent.text);
     };
     public onTogglePaper = () => {
-        this.setState({ paperTrading: !this.state.paperTrading });
+        this.props.updatePaperTrade(!this.props.paperTrading);
     };
     public onTogglePolygon = () => {
-        this.setState({ usePolygon: !this.state.usePolygon });
+        this.props.updatePolygon(!this.props.usePolygon);
     };
     public render() {
         return (
@@ -92,7 +77,7 @@ export class Login extends React.PureComponent<LoginProps, LoginState> {
                         <Text bold>App Api Key</Text>
                         <Input
                             secureTextEntry={true}
-                            value={this.state.appApiKey}
+                            value={this.props.appApiKey}
                             styles={inputStyles}
                             onChange={this.onKeyChanged}
                         />
@@ -101,17 +86,17 @@ export class Login extends React.PureComponent<LoginProps, LoginState> {
                         <Text bold>App Api Secret</Text>
                         <Input
                             secureTextEntry={true}
-                            value={this.state.appApiSecret}
+                            value={this.props.appApiSecret}
                             styles={inputStyles}
                             onChange={this.onSecretChanged}
                         />
                     </Field>
 
                     <Field nowrap>
-                        <Checkbox selected={this.state.paperTrading} styles={checkboxStyles} onPress={this.onTogglePaper} />
+                        <Checkbox selected={this.props.paperTrading} styles={checkboxStyles} onPress={this.onTogglePaper} />
                         <Text bold>Paper (hands) Trading</Text>
                     </Field>
-                    {!this.state.paperTrading && (
+                    {!this.props.paperTrading && (
                         <Field>
                             <Text bold styles={warnStyle}>
                                 WARNING: This is the REAL DEAL. You're going to be making MARKET TRADES
@@ -120,7 +105,7 @@ export class Login extends React.PureComponent<LoginProps, LoginState> {
                     )}
 
                     <Field nowrap>
-                        <Checkbox selected={this.state.usePolygon} styles={checkboxStyles} onPress={this.onTogglePolygon} />
+                        <Checkbox selected={this.props.usePolygon} styles={checkboxStyles} onPress={this.onTogglePolygon} />
                         <Text bold>Use Polygon</Text>
                     </Field>
 
@@ -132,18 +117,33 @@ export class Login extends React.PureComponent<LoginProps, LoginState> {
 }
 
 export const mapStateToProps = (state: RootState) => {
+    const loginState = getDefaultLoginState(state);
     if (!state) {
-        return { isTrue: false };
+        return { appApiKey: "", appApiSecret: "", paperTrading: true, usePolygon: false };
     }
-    return { isTrue: false };
+    return {
+        appApiKey: loginState.appApiKey,
+        appApiSecret: loginState.appApiSecret,
+        paperTrading: loginState.paperTrading,
+        usePolygon: loginState.usePolygon,
+    };
 };
 export const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        setStatus: (status: boolean) => {
-            dispatch(actions.updateStatus(status));
+        updateKey: (value: string) => {
+            dispatch(loginActions.keyUpdated(value));
         },
-        configureApi: (config: ApiConfig) => {
-            dispatch(loginActions.configureApi(config));
+        updateSecret: (value: string) => {
+            dispatch(loginActions.secretUpdated(value));
+        },
+        updatePaperTrade: (value: boolean) => {
+            dispatch(loginActions.paperHandsUpdated(value));
+        },
+        updatePolygon: (value: boolean) => {
+            dispatch(loginActions.polygonUpdated(value));
+        },
+        submitLogin: () => {
+            dispatch(loginActions.loginSubmitted());
         },
     };
 };

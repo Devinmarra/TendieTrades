@@ -1,16 +1,11 @@
 import { actions } from "./slicer";
-import { call, put } from "redux-saga/effects";
+import { call, put, select } from "redux-saga/effects";
 import { configureAlpacaApi } from "../utilities";
-import { ApiConfig } from "../types";
+import { getLoginConfig } from "./selectors";
 
-export function* configureApi(action: ReturnType<typeof actions.configureApi>) {
+export function* configureApi() {
     try {
-        const config: ApiConfig = {
-            appApiKey: action.payload.appApiKey,
-            appApiSecret: action.payload.appApiSecret,
-            paperTrading: action.payload.paperTrading,
-            usePolygon: action.payload.usePolygon,
-        };
+        const config = yield select(getLoginConfig);
         yield call(configureAlpacaApi, config);
         // very crude until oAuth is implemented
         yield put(actions.loginCompleted(true));

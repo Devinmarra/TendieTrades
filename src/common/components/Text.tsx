@@ -4,7 +4,7 @@ import { NativeTouchEvent } from "react-native";
 import * as z from "zod";
 
 const StyledText = styled.Text`
-    color: #000;
+    color: #2c2c2c;
     font-size: 15px;
     line-height: 20px;
     ${(props: TextProps) => props.bold && "font-weight: bold"}
