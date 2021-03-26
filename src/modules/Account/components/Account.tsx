@@ -2,35 +2,61 @@ import React from "react";
 import { RootState } from "../parent";
 import { Dispatch } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
-import { getAccountState, getAccountDetails } from "../selectors";
+import { getAccountDetails } from "../selectors";
 import { actions as accountActions } from "src/services/alpaca/account/slicer";
 import { Text } from "src/common/components/Text";
 import { Card } from "src/common/components/Card";
+import { Checkbox } from "src/common/components/Checkbox";
+import { AccountInfo } from "src/services/alpaca/account/types";
+import { fields } from "../constants";
+import styled from "styled-components/native";
+import * as z from "zod";
+import { css } from "styled-components";
+
+const Field = styled.View`
+    padding: 5px;
+    margin-bottom: 5px;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    border-bottom-width: 1px;
+    border-bottom-color: #eee;
+    ${(props: z.infer<z.ZodRecord>) =>
+        props.last &&
+        css`
+            border-bottom-width: 0px;
+        `}
+`;
 
 export interface AccountProps {
-    buyingPower: string;
-    cash: string;
-    portfolioValue: string;
+    deets: AccountInfo;
     getAccountInfo: () => void;
-    getAccountConfig: () => void;
 }
 export class Account extends React.PureComponent<AccountProps> {
-    // public onPressGetAcct = () => {
-    //     this.props.getAccountInfo();
-    // };
-    public onGetAccountConfig = () => {
-        this.props.getAccountConfig();
-    };
     public componentDidMount() {
         this.props.getAccountInfo();
     }
     public render() {
+        const details: z.infer<z.ZodRecord> = {
+            ...this.props.deets,
+        };
         return (
             <Card>
-                <Text>Account Info</Text>
-                <Text>Portfolio Value: ${this.props.portfolioValue}</Text>
-                <Text>Buying Power: ${this.props.buyingPower}</Text>
-                <Text>Cash: ${this.props.cash}</Text>
+                {fields.map((field, index) => {
+                    const key = field.key;
+                    const val = details[key];
+                    return (
+                        <Field key={`field-${index}`} last={index + 1 === fields.length}>
+                            <Text>{field.title}</Text>
+                            {field.type !== "boolean" && (
+                                <Text bold>
+                                    {field.type === "currency" && "$"}
+                                    {val}
+                                </Text>
+                            )}
+                            {field.type === "boolean" && <Checkbox selected={val} />}
+                        </Field>
+                    );
+                })}
             </Card>
         );
     }
@@ -39,19 +65,13 @@ export class Account extends React.PureComponent<AccountProps> {
 export const mapStateToProps = (state: RootState) => {
     const deets = getAccountDetails(state);
     return {
-        isTrue: getAccountState(state),
-        buyingPower: deets.buyingPower,
-        cash: deets.cash,
-        portfolioValue: deets.portfolioValue,
+        deets,
     };
 };
 export const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         getAccountInfo: () => {
             dispatch(accountActions.getAccountInfo());
-        },
-        getAccountConfig: () => {
-            dispatch(accountActions.getAccountConfiguration());
         },
         getPortfolioHistory: () => {
             dispatch(accountActions.getPortfolioHistory());

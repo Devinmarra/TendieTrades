@@ -6,7 +6,6 @@ type ZodAny = z.infer<z.ZodAny>;
 export let alpaca: ZodAny;
 
 export const configureAlpacaApi = (config: ApiConfig) => {
-    console.log(config);
     alpaca = new Alpaca({
         keyId: config.appApiKey,
         secretKey: config.appApiSecret,

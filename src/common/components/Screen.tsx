@@ -3,14 +3,15 @@ import * as z from "zod";
 
 export const Wrap = styled.SafeAreaView`
     width: 100%;
-    height: 105px;
+    height: fit-content;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
+    padding: 20px;
     ${(props: z.infer<z.ZodAny>) => props.styles}
 `;
 
 export const StyledScrollView = styled.ScrollView`
-    max-width: 800px;
+    max-width: 600px;
 `;
