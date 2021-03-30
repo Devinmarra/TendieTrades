@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AccountInfo, AccountConfig, PortfolioHistory } from "./types";
+import { AccountApiResponse, AccountConfig, PortfolioHistory } from "./types";
 
 export interface State {
-    details?: AccountInfo;
+    details?: AccountApiResponse;
     accountConfig?: AccountConfig;
     portfolioHistory?: PortfolioHistory;
 }
@@ -31,7 +31,7 @@ export const { actions, reducer, name } = createSlice({
             reducer: (state, action) => {
                 state.details = action.payload;
             },
-            prepare: (accountInfo: AccountInfo) => ({
+            prepare: (accountInfo: AccountApiResponse) => ({
                 payload: accountInfo,
                 error: false,
                 meta: {},

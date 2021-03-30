@@ -17,3 +17,7 @@ export const getLoggedInStatus = createSelector(getLoginState, (state): boolean 
     }
     return state.loggedIn;
 });
+
+export const getPaperTrading = createSelector(getLoginState, (state): boolean => {
+    return state.apiConfig.paperTrading;
+});

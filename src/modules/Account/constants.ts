@@ -1,4 +1,4 @@
-interface AccountField {
+export interface AccountField {
     key: string;
     title: string;
     type: string;

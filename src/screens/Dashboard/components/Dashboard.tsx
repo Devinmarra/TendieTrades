@@ -9,6 +9,7 @@ import ViewOrder from "src/modules/Orders/components/ViewOrder";
 import Portfolio from "src/modules/Portfolio/components/Portfolio";
 import Positions from "src/modules/Positions/components/Positions";
 import { Wrap, StyledScrollView } from "src/common/components/Screen";
+import Overview from "src/modules/Account/components/Overview";
 
 export interface DashboardProps {
     test: boolean;
@@ -18,6 +19,7 @@ export class Dashboard extends React.PureComponent<DashboardProps> {
         return (
             <Wrap>
                 <StyledScrollView>
+                    <Overview />
                     <Account />
                     <Asset />
                     <CreateOrder />

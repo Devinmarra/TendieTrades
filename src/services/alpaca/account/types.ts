@@ -29,7 +29,23 @@ export const zAccountApiResponse = z.object({
     trading_blocked: z.boolean(),
     transfers_blocked: z.boolean(),
 });
-export type AccountInfo = z.infer<typeof zAccountApiResponse>;
+export const zAccountInfo = zAccountApiResponse.extend({
+    buying_power: z.number(),
+    regt_buying_power: z.number(),
+    daytrading_buying_power: z.number(),
+    cash: z.number(),
+    portfolio_value: z.number(),
+    equity: z.number(),
+    last_equity: z.number(),
+    long_market_value: z.number(),
+    maintenance_margin: z.number(),
+    short_market_value: z.number(),
+    initial_margin: z.number(),
+    last_maintenance_margin: z.number(),
+    sma: z.number(),
+});
+export type AccountApiResponse = z.infer<typeof zAccountApiResponse>;
+export type AccountInfo = z.infer<typeof zAccountInfo>;
 
 export const zAccountConfigResponse = z.object({
     dtbp_check: z.string(),

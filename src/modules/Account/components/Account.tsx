@@ -12,6 +12,7 @@ import { fields } from "../constants";
 import styled from "styled-components/native";
 import * as z from "zod";
 import { css } from "styled-components";
+import { currency } from "src/common/utilities";
 
 const Field = styled.View`
     padding: 5px;
@@ -29,12 +30,8 @@ const Field = styled.View`
 
 export interface AccountProps {
     deets: AccountInfo;
-    getAccountInfo: () => void;
 }
 export class Account extends React.PureComponent<AccountProps> {
-    public componentDidMount() {
-        this.props.getAccountInfo();
-    }
     public render() {
         const details: z.infer<z.ZodRecord> = {
             ...this.props.deets,
@@ -49,8 +46,8 @@ export class Account extends React.PureComponent<AccountProps> {
                             <Text>{field.title}</Text>
                             {field.type !== "boolean" && (
                                 <Text bold>
-                                    {field.type === "currency" && "$"}
-                                    {val}
+                                    {field.type === "currency" && `${currency(val)}`}
+                                    {field.type !== "currency" && val}
                                 </Text>
                             )}
                             {field.type === "boolean" && <Checkbox selected={val} />}
@@ -70,9 +67,6 @@ export const mapStateToProps = (state: RootState) => {
 };
 export const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        getAccountInfo: () => {
-            dispatch(accountActions.getAccountInfo());
-        },
         getPortfolioHistory: () => {
             dispatch(accountActions.getPortfolioHistory());
         },
