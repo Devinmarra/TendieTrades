@@ -5,11 +5,7 @@ export const navigationRef = React.createRef<NavigationContainerRef>() as React.
 export const isReadyRef = React.createRef() as React.MutableRefObject<unknown>;
 
 export function navigate(name: string, params?: Record<string, unknown> | undefined) {
-    if (isReadyRef.current && navigationRef.current) {
-        navigationRef.current.navigate(name, params);
-    } else {
-        console.log("NAV Error");
-    }
+    navigationRef.current.navigate(name, params);
 }
 
 export function goBack() {

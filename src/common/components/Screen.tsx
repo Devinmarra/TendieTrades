@@ -9,6 +9,7 @@ export const Wrap = styled.SafeAreaView`
     justify-content: center;
     align-items: center;
     padding: 20px;
+    margin-bottom: 50px;
     ${(props: z.infer<z.ZodAny>) => props.styles}
 `;
 

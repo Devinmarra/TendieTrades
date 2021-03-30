@@ -2,28 +2,19 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { RootState } from "../parent";
 import { Dispatch } from "@reduxjs/toolkit";
-import CreateOrder from "src/modules/Orders/components/CreateOrder";
-import ViewOrder from "src/modules/Orders/components/ViewOrder";
-import Portfolio from "src/modules/Portfolio/components/Portfolio";
-import Positions from "src/modules/Positions/components/Positions";
+import Asset from "src/modules/Asset/components/Asset";
 import { Wrap, StyledScrollView } from "src/common/components/Screen";
-import Overview from "src/modules/Account/components/Overview";
 import { NavBar } from "src/services/navigation/components/NavBar";
 
-export interface DashboardProps {
+export interface AssetsProps {
     test: boolean;
 }
-export class Dashboard extends React.PureComponent<DashboardProps> {
+export class Assets extends React.PureComponent<AssetsProps> {
     render() {
         return (
             <Wrap>
                 <StyledScrollView>
-                    <Overview />
-
-                    <CreateOrder />
-                    <ViewOrder />
-                    <Portfolio />
-                    <Positions />
+                    <Asset />
                 </StyledScrollView>
                 <NavBar />
             </Wrap>
@@ -44,4 +35,4 @@ export const mapDispatchToProps = (_dispatch: Dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Assets);

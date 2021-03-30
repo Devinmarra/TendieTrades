@@ -5,7 +5,7 @@ import { NativeTouchEvent } from "react-native";
 import { color } from "../constants";
 
 const SelectedBox = styled.View`
-    background-color: ${color.green};
+    background-color: ${color.darkBlue};
     width: 14px;
     height: 14px;
     border-radius: 3px;

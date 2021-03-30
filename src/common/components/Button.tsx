@@ -15,7 +15,7 @@ const buttonStyles = css`
     text-align: center;
 `;
 const primaryStyles = css`
-    background-color: ${color.green};
+    background-color: ${color.darkBlue};
 `;
 const StyledButton = styled.Pressable`
     color: #000;
