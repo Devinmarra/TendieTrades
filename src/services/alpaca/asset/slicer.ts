@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SymbolInfo, LastTrade, LastQuote, Bars } from "./types";
+import { createSlice } from "@reduxjs/toolkit";
+import { SymbolInfo, LastTrade, LastQuote, Bars, Timeframe } from "./types";
 
 export interface State {
     symbol: SymbolInfo;
@@ -52,15 +52,27 @@ export const initialState: State = {
     bars: {},
 };
 
-// TODO: This is pretty nutty, break this up somehow
+interface GetSymbolPayload {
+    stonk: string;
+    timeframe: Timeframe;
+}
+
 export const { actions, reducer, name } = createSlice({
     initialState,
     name: "asset",
     reducers: {
-        getSymbol(state, _action: PayloadAction<string>) {
-            state;
+        getSymbol: {
+            reducer: (state) => {
+                state.symbol;
+            },
+            prepare: (payload: GetSymbolPayload) => ({
+                payload: payload.stonk,
+                error: false,
+                meta: {
+                    timeframe: payload.timeframe,
+                },
+            }),
         },
-
         symbolUpdated: {
             reducer: (state, action) => {
                 state.symbol = action.payload;

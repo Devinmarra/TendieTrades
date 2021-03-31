@@ -15,7 +15,7 @@ export function* getStonkSymbol(action: ReturnType<typeof actions.getSymbol>) {
 
         // TODO: Make these values configurable
         // TODO: Figure out if the "end" value actually does anything, can't tell.
-        const bars = yield call(getBarsApi, [action.payload], "1Min", "end");
+        const bars = yield call(getBarsApi, [action.payload], action.meta.timeframe, "end");
         yield put(actions.barsUpdated(bars));
     } catch (error) {
         console.log(error);

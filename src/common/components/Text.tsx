@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { NativeTouchEvent } from "react-native";
+import { NativeTouchEvent, NativeSyntheticEvent } from "react-native";
 import * as z from "zod";
 
 const StyledText = styled.Text`
@@ -13,13 +13,15 @@ const StyledText = styled.Text`
 export interface TextProps {
     bold?: boolean;
     styles?: string | z.infer<z.ZodRecord>;
-    onPress?: (event: NativeTouchEvent) => void;
+    onPress?: (event: NativeSyntheticEvent<NativeTouchEvent>) => void;
+    value?: string;
 }
 export class Text extends React.PureComponent<TextProps> {
     public render() {
         const { bold } = this.props;
         return (
             <StyledText onPress={this.props.onPress} bold={bold} styles={this.props.styles}>
+                {this.props.value}
                 {this.props.children}
             </StyledText>
         );

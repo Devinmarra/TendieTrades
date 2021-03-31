@@ -4,7 +4,6 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
 import { Text } from "src/common/components/Text";
 import { Card } from "src/common/components/Card";
-import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
 import styled from "styled-components/native";
 import { SymbolInfo } from "src/services/alpaca/asset/types";
 import { getSymbolInfo } from "src/services/alpaca/asset/selectors";
@@ -16,9 +15,6 @@ const Header = styled.View`
 export type AssetDetailsProps = SymbolInfo;
 
 export class AssetDetails extends React.PureComponent<AssetDetailsProps> {
-    public onChangeSymbol = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
-        this.setState({ symbol: event.nativeEvent.text });
-    };
     public render() {
         if (!this.props.symbol) {
             return null;
@@ -50,11 +46,7 @@ export const mapStateToProps = (state: RootState) => {
     };
 };
 export const mapDispatchToProps = (_dispatch: Dispatch) => {
-    return {
-        // getSymbolInfo: (stonk: string) => {
-        //     dispatch(assetActions.getSymbol(stonk));
-        // },
-    };
+    return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssetDetails);
