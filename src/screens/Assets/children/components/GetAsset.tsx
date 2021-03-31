@@ -14,15 +14,15 @@ import { timeOptions } from "../constants";
 const Header = styled.View`
     width: 100%;
     flex-flow: row wrap;
+    justify-content: space-between;
 `;
 
 const Options = styled.View`
     flex-flow: row nowrap;
-    margin-left: 5px;
 `;
 const optionsTextStyles = css`
     margin: 0 5px;
-    padding: 5px 10px 0;
+    padding: 5px 5px 0 5px;
 `;
 const optionActive = css`
     border-top-color: ${color.darkBlue};
