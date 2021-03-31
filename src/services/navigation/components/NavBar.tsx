@@ -25,7 +25,7 @@ export class NavBar extends React.PureComponent {
         navigate("Dashboard");
     };
     onPressAssets = () => {
-        navigate("Assets");
+        navigate("Stocks");
     };
     onPressAccount = () => {
         navigate("Account");
@@ -40,7 +40,7 @@ export class NavBar extends React.PureComponent {
                     Account
                 </Text>
                 <Text styles={navBarStyles} onPress={this.onPressAssets}>
-                    Assets
+                    Stocks
                 </Text>
             </Nav>
         );

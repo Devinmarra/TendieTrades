@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { RootState } from "../parent";
 import { Dispatch } from "@reduxjs/toolkit";
-import { default as AccountComponent } from "src/modules/Account/components/Account";
+import { default as AccountComponent } from "src/screens/Account/children/components/Account";
 import { Wrap, StyledScrollView } from "src/common/components/Screen";
 import { NavBar } from "src/services/navigation/components/NavBar";
 

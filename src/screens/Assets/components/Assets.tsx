@@ -1,10 +1,8 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { RootState } from "../parent";
-import { Dispatch } from "@reduxjs/toolkit";
-import Asset from "src/modules/Asset/components/Asset";
+import GetAsset from "src/screens/Assets/children/components/GetAsset";
 import { Wrap, StyledScrollView } from "src/common/components/Screen";
 import { NavBar } from "src/services/navigation/components/NavBar";
+import AssetDetails from "../children/components/AssetDetails";
 
 export interface AssetsProps {
     test: boolean;
@@ -14,25 +12,13 @@ export class Assets extends React.PureComponent<AssetsProps> {
         return (
             <Wrap>
                 <StyledScrollView>
-                    <Asset />
+                    <GetAsset />
+                    <AssetDetails />
                 </StyledScrollView>
                 <NavBar />
             </Wrap>
         );
     }
 }
-export const mapStateToProps = (state: RootState) => {
-    if (!state) {
-        return { test: false };
-    }
-    return { test: true };
-};
-export const mapDispatchToProps = (_dispatch: Dispatch) => {
-    return {
-        //   setStatus: (status: boolean) => {
-        //     dispatch(actions.updateStatus(status));
-        //   },
-    };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Assets);
+export default Assets;

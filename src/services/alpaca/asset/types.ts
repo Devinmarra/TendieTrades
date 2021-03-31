@@ -3,13 +3,6 @@ import * as z from "zod";
 export type Timeframe = "1Min" | "5Min" | "15Min" | "1D";
 export type BarsOptions = "limit" | "start" | "end" | "after" | "until";
 
-// export interface BarsRequestOptions {
-//   limit: number;
-//   start: string;
-//   end: string;
-//   adjustment: string;
-// }
-
 export const zSymbolApiResponse = z.object({
     class: z.string(),
     easy_to_borrow: z.boolean(),

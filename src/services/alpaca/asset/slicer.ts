@@ -2,13 +2,55 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SymbolInfo, LastTrade, LastQuote, Bars } from "./types";
 
 export interface State {
-    symbol?: SymbolInfo;
-    lastTrade?: LastTrade;
-    lastQuote?: LastQuote;
-    bars?: Bars;
+    symbol: SymbolInfo;
+    lastTrade: LastTrade;
+    lastQuote: LastQuote;
+    bars: Bars;
 }
 
-export const initialState: State = {};
+export const initialState: State = {
+    symbol: {
+        id: "",
+        class: "",
+        exchange: "",
+        symbol: "",
+        name: "",
+        status: "",
+        tradable: false,
+        marginable: false,
+        shortable: false,
+        easy_to_borrow: false,
+        fractionable: false,
+    },
+    lastTrade: {
+        status: "",
+        symbol: "",
+        last: {
+            price: 0,
+            size: 0,
+            exchange: 0,
+            cond1: 0,
+            cond2: 0,
+            cond3: 0,
+            cond4: 0,
+            timestamp: 0,
+        },
+    },
+    lastQuote: {
+        status: "",
+        symbol: "",
+        last: {
+            askprice: 0,
+            asksize: 0,
+            askexchange: 0,
+            bidexchange: 0,
+            bidprice: 0,
+            bidsize: 0,
+            timestamp: 0,
+        },
+    },
+    bars: {},
+};
 
 // TODO: This is pretty nutty, break this up somehow
 export const { actions, reducer, name } = createSlice({

@@ -2,7 +2,7 @@ import React from "react";
 import { RootState } from "../parent";
 import { Dispatch } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
-import { getAccountDetails } from "../selectors";
+import { getAccountDetails } from "src/services/alpaca/account/selectors";
 import { actions as accountActions } from "src/services/alpaca/account/slicer";
 import { Text } from "src/common/components/Text";
 import { Card } from "src/common/components/Card";

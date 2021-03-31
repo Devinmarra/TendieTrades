@@ -12,6 +12,7 @@ const StyledInput = styled.TextInput`
 `;
 
 export interface InputProps {
+    placeholder?: string;
     secureTextEntry?: boolean;
     value?: string;
     styles?: string | z.infer<z.ZodRecord>;
@@ -25,6 +26,7 @@ export class Input extends React.PureComponent<InputProps> {
                 value={this.props.value}
                 styles={this.props.styles}
                 onChange={this.props.onChange}
+                placeholder={this.props.placeholder}
             />
         );
     }

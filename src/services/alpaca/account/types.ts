@@ -43,6 +43,7 @@ export const zAccountInfo = zAccountApiResponse.extend({
     initial_margin: z.number(),
     last_maintenance_margin: z.number(),
     sma: z.number(),
+    multiplier: z.number(),
 });
 export type AccountApiResponse = z.infer<typeof zAccountApiResponse>;
 export type AccountInfo = z.infer<typeof zAccountInfo>;

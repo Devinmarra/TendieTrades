@@ -7,7 +7,7 @@ import ViewOrder from "src/modules/Orders/components/ViewOrder";
 import Portfolio from "src/modules/Portfolio/components/Portfolio";
 import Positions from "src/modules/Positions/components/Positions";
 import { Wrap, StyledScrollView } from "src/common/components/Screen";
-import Overview from "src/modules/Account/components/Overview";
+import Overview from "src/screens/Account/children/components/Overview";
 import { NavBar } from "src/services/navigation/components/NavBar";
 
 export interface DashboardProps {

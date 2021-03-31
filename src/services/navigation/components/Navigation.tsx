@@ -25,7 +25,7 @@ export class Navigation extends React.Component<NavigationProps> {
                     <>
                         <Stack.Screen name="Dashboard" component={Dashboard} />
                         <Stack.Screen name="Account" component={Account} />
-                        <Stack.Screen name="Assets" component={Assets} />
+                        <Stack.Screen name="Stocks" component={Assets} />
                     </>
                 )}
                 {!this.props.isLoggedIn && <Stack.Screen name="Login" component={Login} />}
