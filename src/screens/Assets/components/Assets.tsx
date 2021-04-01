@@ -18,8 +18,8 @@ export class Assets extends React.PureComponent<AssetsProps> {
                     <GetAsset />
                     <AssetDetails />
                     <LastTrade />
-                    <LastQuote />
                     <Bars />
+                    <LastQuote />
                 </StyledScrollView>
                 <NavBar />
             </Wrap>

@@ -1,17 +1,35 @@
 import { actions } from "./slicer";
-import { call } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import { getPositionApi, getAllPositionsApi, closeAllPositionsApi, closePositionApi } from "./api";
+import { Position, PositionApiResponse } from "./types";
+
+const transformPosition = (pos: PositionApiResponse): Position => {
+    return {
+        ...pos,
+        avg_entry_price: parseFloat(pos.avg_entry_price),
+        change_today: parseFloat(pos.change_today),
+        cost_basis: parseFloat(pos.cost_basis),
+        current_price: parseFloat(pos.current_price),
+        lastday_price: parseFloat(pos.lastday_price),
+        market_value: parseFloat(pos.market_value),
+        qty: parseFloat(pos.qty),
+        unrealized_intraday_pl: parseFloat(pos.unrealized_intraday_pl),
+        unrealized_intraday_plpc: parseFloat(pos.unrealized_intraday_plpc),
+        unrealized_pl: parseFloat(pos.unrealized_pl),
+        unrealized_plpc: parseFloat(pos.unrealized_plpc),
+    };
+};
 
 export function* getPosition(action: ReturnType<typeof actions.getPosition>) {
     try {
         if (action.payload) {
-            const position = yield call(getPositionApi, action.payload);
-            console.log(position);
-            // yield put(actions.symbolUpdated(symbolInfo));
+            const position: PositionApiResponse = yield call(getPositionApi, action.payload);
+
+            yield put(actions.positionsUpdated([transformPosition(position)]));
         } else {
-            const positions = yield call(getAllPositionsApi);
-            console.log(positions);
-            // yield put(actions.symbolUpdated(symbolInfo));
+            const positions: PositionApiResponse[] = yield call(getAllPositionsApi);
+            const pos = positions.map((p: PositionApiResponse) => transformPosition(p));
+            yield put(actions.positionsUpdated(pos));
         }
     } catch (error) {
         console.log(error);

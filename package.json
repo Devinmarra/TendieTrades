@@ -19,6 +19,7 @@
     "@types/react-redux": "7.1.16",
     "apisauce": "2.0.1",
     "axios": "0.21.1",
+    "js-base64": "^3.6.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.0",

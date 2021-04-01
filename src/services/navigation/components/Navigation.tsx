@@ -7,6 +7,7 @@ import { getLoggedInStatus } from "src/services/alpaca/login/selectors";
 import Dashboard from "src/screens/Dashboard/components/Dashboard";
 import Assets from "src/screens/Assets/components/Assets";
 import Account from "src/screens/Account/components/Account";
+import Positions from "src/screens/Positions/components/Positions";
 
 const Stack = createStackNavigator();
 interface NavigationProps {
@@ -15,15 +16,11 @@ interface NavigationProps {
 export class Navigation extends React.Component<NavigationProps> {
     render() {
         return (
-            <Stack.Navigator
-                initialRouteName={this.props.isLoggedIn ? "Dashboard" : "Login"}
-                //  headerMode="none"
-                // mode={this.props.isLoggedIn ? "card" : "modal"}
-                // screenOptions={{ cardOverlayEnabled: true, headerShown: false }}
-            >
+            <Stack.Navigator initialRouteName={this.props.isLoggedIn ? "Dashboard" : "Login"}>
                 {this.props.isLoggedIn && (
                     <>
                         <Stack.Screen name="Dashboard" component={Dashboard} />
+                        <Stack.Screen name="Positions" component={Positions} />
                         <Stack.Screen name="Account" component={Account} />
                         <Stack.Screen name="Stocks" component={Assets} />
                     </>

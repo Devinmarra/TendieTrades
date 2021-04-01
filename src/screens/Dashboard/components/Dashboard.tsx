@@ -5,7 +5,6 @@ import { Dispatch } from "@reduxjs/toolkit";
 import CreateOrder from "src/modules/Orders/components/CreateOrder";
 import ViewOrder from "src/modules/Orders/components/ViewOrder";
 import Portfolio from "src/modules/Portfolio/components/Portfolio";
-import Positions from "src/modules/Positions/components/Positions";
 import { Wrap, StyledScrollView } from "src/common/components/Screen";
 import Overview from "src/screens/Account/children/components/Overview";
 import { NavBar } from "src/services/navigation/components/NavBar";
@@ -23,7 +22,6 @@ export class Dashboard extends React.PureComponent<DashboardProps> {
                     <CreateOrder />
                     <ViewOrder />
                     <Portfolio />
-                    <Positions />
                 </StyledScrollView>
                 <NavBar />
             </Wrap>

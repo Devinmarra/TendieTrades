@@ -1,5 +1,6 @@
 import * as z from "zod";
 import { alpaca } from "../utilities";
+import { zPositionApiResponse, zPositionsApiResponse } from "./types";
 
 type ZodAny = z.infer<z.ZodAny>;
 
@@ -9,9 +10,9 @@ export const getPositionApi = (symbol: string) => {
     return new Promise((resolve, reject) => {
         api()
             .then((result: ZodAny) => {
-                // if (zLastQuote.parse(result)) {
-                return resolve(result);
-                // }
+                if (zPositionApiResponse.parse(result)) {
+                    return resolve(result);
+                }
             })
             .catch((error: Error) => reject(error));
     });
@@ -23,9 +24,9 @@ export const getAllPositionsApi = () => {
     return new Promise((resolve, reject) => {
         api()
             .then((result: ZodAny) => {
-                // if (zLastQuote.parse(result)) {
-                return resolve(result);
-                // }
+                if (zPositionsApiResponse.parse(result)) {
+                    return resolve(result);
+                }
             })
             .catch((error: Error) => reject(error));
     });

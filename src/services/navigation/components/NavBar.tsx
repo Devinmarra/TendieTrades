@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components/native";
-import { Text } from "src/common/components/Text";
 import { color } from "src/common/constants";
-import { css } from "styled-components";
 import { navigate } from "../navigator";
+import { Button } from "src/common/components/Button";
+import { NativeSyntheticEvent, PressableProps } from "react-native";
 
 const Nav = styled.View`
     position: fixed;
@@ -15,33 +15,19 @@ const Nav = styled.View`
     justify-content: center;
     align-items: center;
 `;
-const navBarStyles = css`
-    color: white;
-    padding: 20px;
-`;
 export class NavBar extends React.PureComponent {
-    // TODO: This is pretty lame.
-    onPressDash = () => {
-        navigate("Dashboard");
-    };
-    onPressAssets = () => {
-        navigate("Stocks");
-    };
-    onPressAccount = () => {
-        navigate("Account");
+    onPressNav = (_event: NativeSyntheticEvent<PressableProps>, value?: string) => {
+        if (value) {
+            navigate(value);
+        }
     };
     render() {
         return (
             <Nav>
-                <Text styles={navBarStyles} onPress={this.onPressDash}>
-                    Dash
-                </Text>
-                <Text styles={navBarStyles} onPress={this.onPressAccount}>
-                    Account
-                </Text>
-                <Text styles={navBarStyles} onPress={this.onPressAssets}>
-                    Stocks
-                </Text>
+                <Button onPress={this.onPressNav} label="Dash" value="Dashboard" />
+                <Button onPress={this.onPressNav} label="Positions" value="Positions" />
+                <Button onPress={this.onPressNav} label="Account" value="Account" />
+                <Button onPress={this.onPressNav} label="Stocks" value="Stocks" />
             </Nav>
         );
     }

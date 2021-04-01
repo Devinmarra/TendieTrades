@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { ApiConfig } from "../types";
+import { Base64 } from "js-base64";
 
 export interface State {
     apiConfig: ApiConfig;
@@ -9,8 +10,8 @@ export interface State {
 export const initialState: State = {
     loggedIn: false,
     apiConfig: {
-        appApiKey: process.env.REACT_APP_API_KEY || "",
-        appApiSecret: process.env.REACT_APP_API_SECRET || "",
+        appApiKey: Base64.encode(process.env.REACT_APP_API_KEY || ""),
+        appApiSecret: Base64.encode(process.env.REACT_APP_API_SECRET || ""),
         // dataBaseUrl: process.env.REACT_APP_DATA_BASE_URL || "",
         // authClientID: process.env.REACT_APP_AUTH_CLIENT_ID || "",
         // authClientSecret: process.env.REACT_APP_AUTH_CLIENT_ID || "",

@@ -13,6 +13,7 @@ import { Dimensions, NativeSyntheticEvent, TextInputChangeEventData } from "reac
 import * as z from "zod";
 import { Button } from "src/common/components/Button";
 import { getDefaultLoginState } from "../selectors";
+import { Base64 } from "js-base64";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -56,10 +57,10 @@ export class Login extends React.PureComponent<LoginProps> {
         this.props.submitLogin();
     };
     public onKeyChanged = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
-        this.props.updateKey(event.nativeEvent.text);
+        this.props.updateKey(Base64.encode(event.nativeEvent.text));
     };
     public onSecretChanged = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
-        this.props.updateSecret(event.nativeEvent.text);
+        this.props.updateSecret(Base64.encode(event.nativeEvent.text));
     };
     public onTogglePaper = () => {
         this.props.updatePaperTrade(!this.props.paperTrading);
