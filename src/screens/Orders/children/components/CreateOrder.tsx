@@ -1,5 +1,5 @@
 import React from "react";
-import { RootState } from "../parent";
+import { RootState } from "../../parent";
 import { Dispatch } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
 import { actions as ordersActions } from "src/services/alpaca/orders/slicer";

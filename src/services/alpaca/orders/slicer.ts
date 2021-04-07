@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { OrderDetails } from "./types";
+import type { OrderDetails, OrderStatusType } from "./types";
 
 export interface State {
     orderDetails?: OrderDetails;
@@ -17,7 +17,7 @@ export const { actions, reducer, name } = createSlice({
         createOrder(state, _action: PayloadAction<string>) {
             state;
         },
-        getOrders(state, _action: PayloadAction<string>) {
+        getOrders(state, _action: PayloadAction<OrderStatusType>) {
             state;
         },
         cancelOrder(state, _action: PayloadAction<string>) {

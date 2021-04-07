@@ -3,7 +3,7 @@ import { alpaca } from "../utilities";
 import { CreateOrderRequest, zOrderDetails, GetOrdersRequest } from "./types";
 
 type ZodAny = z.infer<z.ZodAny>;
-
+// TODO: PATCH ORDER
 export const createOrderApi = (request: CreateOrderRequest) => {
     const api = () => alpaca.createOrder(request).then((result: ZodAny) => result);
     return new Promise((resolve, reject) => {

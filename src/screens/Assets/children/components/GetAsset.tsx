@@ -5,11 +5,11 @@ import { actions as assetActions } from "src/services/alpaca/asset/slicer";
 import { Card } from "src/common/components/Card";
 import { Input } from "src/common/components/Input";
 import { NativeSyntheticEvent, TextInputChangeEventData, PressableProps } from "react-native";
-import styled, { css } from "styled-components/native";
-import { color } from "src/common/constants";
+import styled from "styled-components/native";
 import { Timeframe, BarsOptions } from "src/services/alpaca/asset/types";
 import { Button } from "src/common/components/Button";
 import { timeOptions } from "../constants";
+import SelectionBar from "src/common/components/SelectionBar";
 
 const Header = styled.View`
     width: 100%;
@@ -17,18 +17,6 @@ const Header = styled.View`
     justify-content: space-between;
 `;
 
-const Options = styled.View`
-    flex-flow: row nowrap;
-`;
-const optionsTextStyles = css`
-    margin: 0 5px;
-    padding: 5px 5px 0 5px;
-`;
-const optionActive = css`
-    border-top-color: ${color.darkBlue};
-    border-top-width: 1px;
-    color: ${color.darkGrey};
-`;
 export interface GetAssetProps {
     getSymbolInfo: (stonk: string, timeframe: Timeframe) => void;
 }
@@ -63,21 +51,7 @@ export class GetAsset extends React.PureComponent<GetAssetProps, GetAssetState> 
                         placeholder={"Ticker Symbol"}
                         onChange={this.onChangeSymbol}
                     />
-                    <Options>
-                        {timeOptions.map((to, index) => {
-                            return (
-                                <Button
-                                    key={`time-${index}`}
-                                    onPress={this.onPressTime}
-                                    styles={optionsTextStyles}
-                                    textStyles={this.state.timeframe === to.timeframe && optionActive}
-                                    label={to.text}
-                                    value={to.timeframe}
-                                    type="text"
-                                />
-                            );
-                        })}
-                    </Options>
+                    <SelectionBar options={timeOptions} selected={this.state.timeframe} onPress={this.onPressTime} />
                     <Button onPress={this.onPressGetSymbol} type="button" primary label="Get" />
                 </Header>
             </Card>

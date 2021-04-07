@@ -20,11 +20,12 @@ export function* createOrder(_action: ReturnType<typeof actions.createOrder>) {
     }
 }
 
-export function* getOrders(_action: ReturnType<typeof actions.getOrders>) {
+// TODO: This functionality can be expanded beyond just order status
+export function* getOrders(action: ReturnType<typeof actions.getOrders>) {
     try {
         // TODO: All the different order types
         const request: GetOrdersRequest = {
-            status: "all",
+            status: action.payload,
             after: "2021-03-17T15:04:05Z",
             // until: "2021-03-19T15:04:05Z",
             limit: 0,

@@ -26,6 +26,7 @@ export class NavBar extends React.PureComponent {
             <Nav>
                 <Button onPress={this.onPressNav} label="Dash" value="Dashboard" />
                 <Button onPress={this.onPressNav} label="Positions" value="Positions" />
+                <Button onPress={this.onPressNav} label="Orders" value="Orders" />
                 <Button onPress={this.onPressNav} label="Account" value="Account" />
                 <Button onPress={this.onPressNav} label="Stocks" value="Stocks" />
             </Nav>

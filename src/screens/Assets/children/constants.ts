@@ -1,18 +1,18 @@
 export const timeOptions = [
     {
-        timeframe: "1Min",
-        text: "1 Min",
+        value: "1Min",
+        label: "1 Min",
     },
     {
-        timeframe: "5Min",
-        text: "5 Min",
+        value: "5Min",
+        label: "5 Min",
     },
     {
-        timeframe: "15Min",
-        text: "15 Min",
+        value: "15Min",
+        label: "15 Min",
     },
     {
-        timeframe: "1D",
-        text: "1 Day",
+        value: "1D",
+        label: "1 Day",
     },
 ];

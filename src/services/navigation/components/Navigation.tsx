@@ -8,6 +8,7 @@ import Dashboard from "src/screens/Dashboard/components/Dashboard";
 import Assets from "src/screens/Assets/components/Assets";
 import Account from "src/screens/Account/components/Account";
 import Positions from "src/screens/Positions/components/Positions";
+import Orders from "src/screens/Orders/components/Orders";
 
 const Stack = createStackNavigator();
 interface NavigationProps {
@@ -21,6 +22,7 @@ export class Navigation extends React.Component<NavigationProps> {
                     <>
                         <Stack.Screen name="Dashboard" component={Dashboard} />
                         <Stack.Screen name="Positions" component={Positions} />
+                        <Stack.Screen name="Orders" component={Orders} />
                         <Stack.Screen name="Account" component={Account} />
                         <Stack.Screen name="Stocks" component={Assets} />
                     </>

@@ -2,22 +2,21 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { RootState } from "../parent";
 import { Dispatch } from "@reduxjs/toolkit";
-import Portfolio from "src/modules/Portfolio/components/Portfolio";
 import { Wrap, StyledScrollView } from "src/common/components/Screen";
-import Overview from "src/screens/Account/children/components/Overview";
 import { NavBar } from "src/services/navigation/components/NavBar";
+import ViewOrder from "../children/components/ViewOrder";
+import CreateOrder from "../children/components/CreateOrder";
 
-export interface DashboardProps {
+export interface OrdersProps {
     test: boolean;
 }
-export class Dashboard extends React.PureComponent<DashboardProps> {
+export class Orders extends React.PureComponent<OrdersProps> {
     render() {
         return (
             <Wrap>
                 <StyledScrollView>
-                    <Overview />
-
-                    <Portfolio />
+                    <CreateOrder />
+                    <ViewOrder />
                 </StyledScrollView>
                 <NavBar />
             </Wrap>
@@ -38,4 +37,4 @@ export const mapDispatchToProps = (_dispatch: Dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);

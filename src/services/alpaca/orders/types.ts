@@ -57,8 +57,9 @@ export const zOrderDetails = z.object({
 });
 export type OrderDetails = z.infer<typeof zOrderDetails>;
 
+export type OrderStatusType = "open" | "closed" | "all";
 export interface GetOrdersRequest {
-    status: "open" | "closed" | "all";
+    status: OrderStatusType;
     after: string; // Date
     until?: string;
     limit: number;
